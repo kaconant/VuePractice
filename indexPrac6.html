@@ -1,0 +1,70 @@
+<!-- Purpose: toggle colors -->
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VueJS</title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div 
+        class='demo' 
+        @click='attachRed = !attachRed'
+        :class='divClasses'>
+        <!-- red is key and attachRed is value -->
+      </div>
+      <div 
+        class='demo' 
+        :class='{red: attachRed}'>
+        <!-- red is key and attachRed is value -->
+      </div>
+      <div class="demo" :class='[color, {red: attachRed}]'></div>
+      <hr>
+      <input type="text" v-model='color'>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          attachRed: false,
+          color: 'green'
+        },
+        computed: {
+          divClasses: function() {
+            return {
+              red: this.attachRed,
+              blue: !this.attachRed
+            }
+          }
+        }
+      })
+    </script>
+
+    <style scoped>
+    .demo {
+      width: 100px;
+      height: 100px;
+      background-color: grey;
+      display: inline-block;
+      margin: 10px;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+    .green {
+      background-color: green;
+    }
+    </style>
+    
+  </body>
+</html>

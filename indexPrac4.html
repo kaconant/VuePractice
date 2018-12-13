@@ -1,0 +1,59 @@
+<!-- Purpose: Allows you to have to counters independently. introduces computed and watch.-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+    <button v-on:click='counter++'>Increase!</button>
+    <button v-on:click='counter--'>Decrease!</button>
+    <button v-on:click='secondCounter++'>Increase 2nd Counter</button>
+    <p>Counter: {{ counter }} | {{ secondCounter }} </p>
+    <p>Result: {{ result() }} | {{ output }}</p>
+	</div>
+
+  <!-- the data property is not reactive -->
+  <!-- use computed property like a data object - don't have to call it-->
+  <!-- fx's in method get called all the time unlike computed which analyzes it -->
+  <!-- computed is better than watch as it caches -->
+  <!-- computed must be sync where as watch can be async -->
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+        counter: 0,
+        secondCounter: 0,
+        result: ''
+      },
+      computed: {
+        output: function() {
+          return this.counter > 5 ? 'Greater than 5' : 'Less than 5'
+        }
+      },
+      watch: {
+        counter: function(value) {
+          var vm = this;
+          setTimeout(function() {
+            vm.counter = 0;
+          }, 2000);
+        }
+      },
+      methods: {
+        result: function() {
+          return this.counter > 5 ? 'Greater than 5' : 'Less than 5'
+        }
+      }
+    })
+	</script>
+
+</body>
+
+</html>
